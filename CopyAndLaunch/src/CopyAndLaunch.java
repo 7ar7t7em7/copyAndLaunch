@@ -43,7 +43,7 @@ public class CopyAndLaunch {
     // Содержимое bat-файла
     private static final String[] BAT_LINES = {
         "\"c:\\Program Files (x86)\\1Cv77\\BIN\\1cv7s.exe\" "
-            + "CONFIG /Dd:\\яПользователи /nДубинскийАртем /p060620131"
+            +  "CONFIG /Dd:\\яПользователи /nДубинскийАртем /p060620131"
     };
 
     public static void main(String[] args) {
