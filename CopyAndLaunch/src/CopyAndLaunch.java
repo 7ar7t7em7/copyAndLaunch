@@ -109,6 +109,11 @@ public class CopyAndLaunch {
             System.out.println("Файлы скопированы. Запускаю 1C...");
             runBat();
 
+            System.out.println("1С завершена. Копирую файлы обратно...");
+            copyBack(source.resolve(FILE_DBA), Paths.get(DEST_DBA, FILE_DBA));
+            copyBack(source.resolve(FILE_USR), Paths.get(DEST_USR, FILE_USR));
+            System.out.println("Готово.");
+
         } catch (IOException e) {
             System.err.println("Ошибка при копировании: " + e.getMessage());
         } catch (InterruptedException e) {
@@ -160,6 +165,18 @@ public class CopyAndLaunch {
         proc.waitFor();
 
         Files.deleteIfExists(bat);
+    }
+
+    private static void copyBack(Path from, Path to) throws IOException {
+        if (!Files.exists(from)) {
+            System.out.println("Файл не найден для обратного копирования: " + from);
+            return;
+        }
+        if (to.getParent() != null) {
+            Files.createDirectories(to.getParent());
+        }
+        Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);
+        System.out.println("Обратно скопирован: " + from + " → " + to);
     }
 
 }
