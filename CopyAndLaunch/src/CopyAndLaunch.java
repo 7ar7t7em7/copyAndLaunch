@@ -171,6 +171,9 @@ public class CopyAndLaunch {
             System.out.println("Файл не найден для обратного копирования: " + from);
             return;
         }
+        if (to.getParent() != null) {
+            Files.createDirectories(to.getParent());
+        }
         Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);
         System.out.println("Обратно скопирован: " + from + " → " + to);
     }
