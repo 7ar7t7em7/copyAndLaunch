@@ -109,8 +109,8 @@ public class CopyAndLaunch {
             runBat();
 
             System.out.println("1С завершена. Копирую файлы обратно...");
-            copyBack(source.resolve(FILE_DBA), Paths.get(DEST_DBA, FILE_DBA));
-            copyBack(source.resolve(FILE_USR), Paths.get(DEST_USR, FILE_USR));
+            copyBack(Paths.get(DEST_DBA, FILE_DBA), source.resolve(FILE_DBA));
+            copyBack(Paths.get(DEST_USR, FILE_USR), source.resolve(FILE_USR));
             System.out.println("Готово.");
 
         } catch (IOException e) {
@@ -170,9 +170,6 @@ public class CopyAndLaunch {
         if (!Files.exists(from)) {
             System.out.println("Файл не найден для обратного копирования: " + from);
             return;
-        }
-        if (to.getParent() != null) {
-            Files.createDirectories(to.getParent());
         }
         Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);
         System.out.println("Обратно скопирован: " + from + " → " + to);
